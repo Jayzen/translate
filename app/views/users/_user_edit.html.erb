@@ -1,0 +1,39 @@
+<div class="col-md-10">
+    <div class="card">
+      <div class="card-header text-secondary text-center">
+        基本信息
+      </div>
+      <div class="card-body">
+        <%= render partial: 'shared/errors', locals: { demo: @user } %>
+        <%= form_for(@user, url: user_path(@user), method: 'put') do |f| %>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-secondary">姓名</label>
+          <div class="col-sm-10">
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-secondary">邮箱</label>
+          <div class="col-sm-10">
+            <%= f.email_field :email, class: "form-control"%>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-secondary">个人说明</label>
+          <div class="col-sm-10">
+            <%= f.text_area :description, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+            <%= f.submit "更新资料", class: "btn btn-primary btn-sm" %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+</div>

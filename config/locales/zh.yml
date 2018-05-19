@@ -1,0 +1,128 @@
+zh:
+  home: "主页"
+  login: "登录"
+  or: "或者"
+  about: "关于我"
+  logout: "退出"
+  user_login: "用户登录"
+  remember_me: "记住用户"
+  show: "查看"
+  edit: "编辑"
+  destroy: "删除"
+  confirm_delete: "确定删除?"
+  email: "邮箱"
+  update_information: "更新资料"
+  old_password: "旧密码"
+  new_password: "新密码"
+  password_confirmation: "密码确认"
+  alter_password: "修改密码"
+  social_name: "名称"
+  url: "url"
+  upload_avatar: "上传头像"
+  upload: "上传"
+  download: "下载"
+  reupload: "重新上传"
+  preview_avatar: "头像预览"
+  tailor_avatar: "头像裁剪"
+  incorrect_old_password: "不正确"
+  can_not_be_blank: "不能为空"
+  password_reset_successfully: "密码已经重置成功"
+  old_password_can_not_be_used: "不能使用旧密码进行更新"
+  create_successfully: "创建成功"
+  update_successfully: "更新成功"
+  destroy_successfully: "删除成功"
+  upload_successfully: "上传成功"
+  tailor_successfully: "头像裁剪成功"
+  login_successfully: "用户登录成功"
+  github_login_successfully: "GitHub登录成功"
+  email_or_password_error: "邮箱或者密码错误"
+  user_need_login: "用户需要进行登录"
+  must_upload: "必须提交"
+  github_login: "支持GitHub 登录"
+  
+  errors:
+    messages:
+      extension_whitelist_error: "格式不正确"
+  views:
+    pagination:
+      first: "&laquo; 首页"
+      last: "末页 &raquo;"
+      previous: "&lsaquo; 上页"
+      next: "下页 &rsaquo;"
+      truncate: "..."
+ 
+  datetime:
+    distance_in_words:
+      half_a_minute: "半分钟"  
+      less_than_x_seconds: 
+        one: "一秒内"  
+        other: "少于 %{count} 秒"  
+      x_seconds:  
+        one: "一秒"  
+        other: "%{count} 秒"  
+      less_than_x_minutes:  
+        one: "一分钟内"  
+        other: "少于 %{count} 分钟"  
+      x_minutes:  
+        one: "一分钟"  
+        other: "%{count} 分钟"  
+      about_x_hours:  
+        one: "大约一小时"  
+        other: "大约 %{count} 小时"  
+      x_hours:  
+        one:   "1 小时"  
+        other: "%{count} 小时"  
+      x_days:
+        one: "一天"
+        other: "%{count} 天"
+      about_x_months:  
+        one: "大约一个月"  
+        other: "大约 %{count} 个月"  
+      x_months:  
+        one: "一个月"  
+        other: "%{count} 个月"  
+      about_x_years:  
+        one: "大约一年"  
+        other: "大约 %{count} 年"  
+      over_x_years:  
+        one: "超过一年"  
+        other: "超过 %{count} 年"  
+      almost_x_years:  
+        one:   "将近 1 年"  
+        other: "将近 %{count} 年"       
+  activerecord:
+    attributes:
+      user:
+        name: "用户名(中文)"
+        email: "邮箱"
+        name_en: "用户名(英文)"
+        password: "密码"
+        old_password: "旧密码"
+        password_confirmation: "密码确认"
+        avatar: "头像"
+        city: "城市"
+        description: "个人说明"
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "不能为空"
+              too_long: "字符太长"
+            name_en:
+              blank: "不能为空"
+              too_long: "字符太长"
+            email:
+              blank: "不能为空"
+              invalid: "格式不正确"
+              taken: "已经被注册"
+              too_long: "字符太长"
+            avatar:
+              blank: "不能为空"
+            password:
+              blank: "不能为空"
+              too_short: "字符太短"
+            password_confirmation:
+              confirmation: "不一致"
+
+

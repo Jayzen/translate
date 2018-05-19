@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'template_two', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'template_two', 'data-turbolinks-track': 'reload' %>
+    <%= render 'layouts/shim' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+  <%= yield :javascripts %>
+</html>
