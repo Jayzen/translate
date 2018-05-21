@@ -1,0 +1,22 @@
+<div class="col-md-9">
+<table class="table table-sm bg-white mb-1">
+  <thead>
+    <tr>
+      <th class="text-left text-secondary">单词</th>
+      <th class="text-right"><%= link_to "新建单词", new_word_path, class: "btn btn-sm btn-primary" %></th>
+    </tr>
+  </thead> 
+  <tbody>
+    <% @words.each do |word| %>
+      <tr>
+        <td class="text-left text-secondary"><%= word.name %></td>
+        <td class="text-right">
+          <%= link_to '编辑', edit_word_path(word), class: "badge badge-success" %>
+          <%= link_to '删除', word, method: :delete, data: { confirm: '确定删除这个单词么?' }, class: "badge badge-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @words %>
+</div>

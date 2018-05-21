@@ -1,0 +1,35 @@
+<%= form_tag '/words/search', method: :get do %>
+  <p class="text-center">
+    <%= text_field_tag :search %>
+    <%= submit_tag "查询", class: "btn btn-sm btn-primary" %>
+  </p>
+<% end %>
+
+<table class="table table-sm bg-white mb-1">
+  <thead>
+    <tr>
+      <th class="text-secondary text-left">单词</th>
+      <th></th>
+      <th class="text-secondary text-right"><%= link_to "新建单词", new_word_path, class: "btn btn-sm btn-primary" %></th>
+    </tr>
+  </thead> 
+  <tbody>
+    <% @words.each do |word| %>
+      <tr>
+        <td class="text-left text-secondary"><%= word.name %>  <span class="badge badge-danger" id="<%= word.id %>-status-explain"><%= word.status == false ? "陌生" : ""%></span></td>
+        <td></td>
+        <td class="text-right">
+          <span id="<%= word.id %>-status">
+            <% if word.status? %>
+              <%= link_to "设为陌生", status_word_path(word), class: "badge badge-danger", remote: true%>
+            <% else %>
+              <%= link_to "设为熟悉", status_word_path(word), class: "badge badge-success", remote: true%>
+            <% end -%>
+          </span>
+          <%= link_to '显示', word, class: "badge badge-primary" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @words %>

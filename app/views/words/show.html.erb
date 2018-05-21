@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-header">
+    <%= @word.name %>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><strong>美音音标:</strong> &nbsp&nbsp <%= @word.us %></p>
+    <p class="card-text"><strong>英音音标:</strong> &nbsp&nbsp <%= @word.uk %></p>
+    <p class="card-text"><strong>中文翻译:</strong> &nbsp&nbsp <%= @word.chinese %></p>
+    <%= link_to "返回主页", root_path, class: "btn btn-sm btn-primary" %>
+  </div>
+</div>
+

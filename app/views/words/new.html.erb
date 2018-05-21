@@ -1,0 +1,5 @@
+<% provide(:title, @word.new_record? ? "新建单词" : "编辑单词") %>
+<div class="row">
+  <%= render 'shared/basic_bar' %>
+  <%= render 'word_new' %>
+</div>

@@ -1,0 +1,22 @@
+<div class="col-md-9">
+    <div class="card">
+      <div class="card-header text-secondary text-center">
+        单词分类列表
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <% @tags.each do |tag| %>
+            <li class="list-group-item text-secondary">
+              <%= tag.name %>
+              &nbsp&nbsp
+              <%= link_to "编辑", edit_tag_path(tag), class: "text-secondary" %>|
+              <%= link_to "删除", tag, method: :delete, data: { confirm: "确定删除?" }, class: "text-secondary" %>
+            </li>
+          <% end %>
+          <li class="list-group-item text-secondary">
+            <%= link_to "新建单词分类", new_tag_path, class: "btn btn-primary btn-sm" %>
+          </li>
+        </ul>
+      </div>
+    </div>
+</div>

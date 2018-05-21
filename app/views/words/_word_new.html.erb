@@ -1,0 +1,58 @@
+<div class="col-md-9">
+    <div class="card">
+      <div class="card-header text-secondary text-center">
+        <%= @word.new_record? ? "新建单词" : "编辑单词" %>
+      </div>
+      <div class="card-body">
+        <%= render partial: 'shared/errors', locals: { demo: @word } %>
+        <%= form_for(@word,
+                     url: (@word.new_record? ? words_path : word_path(@word)),
+                     method: (@word.new_record? ? 'post' : 'put')) do |f| %>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-secondary">名称:</label>
+          <div class="col-sm-10">
+            <%= f.text_field :name, class: "form-control", autofocus: true %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-secondary">美音:</label>
+          <div class="col-sm-10">
+            <%= f.text_field :uk, class: "form-control", autofocus: true %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-secondary">英音:</label>
+          <div class="col-sm-10">
+            <%= f.text_field :us, class: "form-control", autofocus: true %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-secondary">翻译:</label>
+          <div class="col-sm-10">
+            <%= f.text_field :chinese, class: "form-control", autofocus: true %>
+          </div>
+        </div> 
+        
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-secondary">分类:</label>
+          <div class="col-sm-10">
+            <%= f.collection_select :tag_id, current_user.tags, :id, :name, {}, { class: "form-control" } %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+            <%= f.submit (@word.new_record? ? "创建单词" : "更新单词"), class: "btn btn-primary btn-sm"%>
+            <%= link_to "返回单词列表", words_lists_path, class: "btn btn-primary btn-sm"%>
+          </div>
+        </div>
+        
+        <% end %>
+      </div>
+    </div>
+</div>

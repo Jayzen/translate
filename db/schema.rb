@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_19_140917) do
+ActiveRecord::Schema.define(version: 2018_05_21_113334) do
+
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tags_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email"
@@ -26,4 +34,21 @@ ActiveRecord::Schema.define(version: 2018_05_19_140917) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "words", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "uk"
+    t.string "us"
+    t.string "chinese"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "tag_id"
+    t.boolean "status", default: false
+    t.index ["name"], name: "index_words_on_name"
+    t.index ["tag_id"], name: "index_words_on_tag_id", unique: true
+    t.index ["user_id"], name: "index_words_on_user_id"
+  end
+
+  add_foreign_key "tags", "users"
+  add_foreign_key "words", "users"
 end

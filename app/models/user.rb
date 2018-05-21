@@ -13,7 +13,9 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: true
     
   has_secure_password
-  
+  has_many :words
+  has_many :tags
+
   def downcase_email
     self.email = email.downcase
   end
