@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = t('update_successfully')
+      flash[:success] = "更新成功"
       redirect_to edit_user_path(@user)
     else
       render :edit

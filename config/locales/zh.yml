@@ -22,20 +22,10 @@ zh:
   upload: "上传"
   download: "下载"
   reupload: "重新上传"
-  preview_avatar: "头像预览"
-  tailor_avatar: "头像裁剪"
-  incorrect_old_password: "不正确"
-  can_not_be_blank: "不能为空"
-  password_reset_successfully: "密码已经重置成功"
-  old_password_can_not_be_used: "不能使用旧密码进行更新"
   create_successfully: "创建成功"
-  update_successfully: "更新成功"
   destroy_successfully: "删除成功"
   upload_successfully: "上传成功"
   tailor_successfully: "头像裁剪成功"
-  login_successfully: "用户登录成功"
-  github_login_successfully: "GitHub登录成功"
-  email_or_password_error: "邮箱或者密码错误"
   user_need_login: "用户需要进行登录"
   must_upload: "必须提交"
   github_login: "支持GitHub 登录"
@@ -93,14 +83,12 @@ zh:
   activerecord:
     attributes:
       user:
-        name: "用户名(中文)"
+        name: "用户名"
         email: "邮箱"
-        name_en: "用户名(英文)"
         password: "密码"
         old_password: "旧密码"
         password_confirmation: "密码确认"
         avatar: "头像"
-        city: "城市"
         description: "个人说明"
     errors:
       models:
@@ -123,6 +111,6 @@ zh:
               blank: "不能为空"
               too_short: "字符太短"
             password_confirmation:
-              confirmation: "不一致"
+              confirmation: "密码确认不一致"
 
 

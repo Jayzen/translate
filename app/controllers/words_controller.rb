@@ -22,7 +22,22 @@ class WordsController < ApplicationController
     @words = current_user.words.where(name: params[:search].strip).page(params[:page])
     render 'index'
   end
-  
+
+  def familiar
+    @words = current_user.words.where(status: true).page(params[:page])
+    render 'index'
+  end
+
+  def unfamiliar
+    @words = current_user.words.where(status: false).page(params[:page])
+    render 'index'
+  end
+
+  def tags
+    @words = current_user.words.where(tag_id: params[:tag_id]).page(params[:page])
+    render 'index'
+  end
+
   def interpret
     appKey = Rails.application.credentials.dig(:development, :youdao_appKey)
     secretKey = Rails.application.credentials.dig(:development, :youdao_secretKey)

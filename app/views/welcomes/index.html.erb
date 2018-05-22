@@ -7,7 +7,7 @@
       <div class="card-body">
         <%= form_tag '/words/interpret', method: :get do %>
           <p class="text-center">
-            <%= text_field_tag :name, nil, placeholder: 'enter word...' %>
+            <%= text_field_tag :name %>
             <%= submit_tag "翻译", class: "btn btn-primary btn-sm"%>
           </p>
         <% end %> 

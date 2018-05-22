@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     get 'search', on: :collection
     get 'interpret', on: :collection
     get 'status', on: :member
+    get 'familiar', on: :collection
+    get 'unfamiliar', on: :collection
+    get 'tags', on: :collection
   end
   root 'welcomes#index'
   get  '/login', to: 'sessions#new'
