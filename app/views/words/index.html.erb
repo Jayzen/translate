@@ -5,7 +5,7 @@
   </p>
 <% end %>
 
-<div class="text-left mb-2">
+<div class="text-center mb-4">
   <%= link_to "陌生", unfamiliar_words_path, class: "badge badge-danger" %>
   <%= link_to "熟悉", familiar_words_path, class: "badge badge-success" %>
   <% current_user.tags.each do |tag| %>
@@ -13,13 +13,6 @@
   <% end %>
 </div>
 <table class="table table-sm bg-white mb-1">
-  <thead>
-    <tr>
-      <th class="text-secondary text-left">单词</th>
-      <th></th>
-      <th class="text-secondary text-right"><%= link_to "新建单词", new_word_path, class: "btn btn-sm btn-primary" %></th>
-    </tr>
-  </thead> 
   <tbody>
     <% @words.each do |word| %>
       <tr>
