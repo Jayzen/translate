@@ -39,38 +39,26 @@ class WordsController < ApplicationController
   end
 
   def interpret
-    if @word = Word.find_by(name: params[:name].strip)
+    name = params[:name].strip
+    if @word = Word.find_by(name: name)
       current_user.words << @word
       redirect_to word_path(@word)
     else
-      appKey = Rails.application.credentials.dig(:development, :youdao_appKey)
-      secretKey = Rails.application.credentials.dig(:development, :youdao_secretKey)
-      myurl = 'https://openapi.youdao.com/api'
-      q = params[:name].strip
-      from = 'EN'
-      to = 'zh-CHS'
-      salt = Random.rand(10000).to_s
-      sign = Digest::MD5.hexdigest(appKey+q+salt+secretKey).upcase
-
-      url = myurl+"?q="+q+"&from="+from+"&to="+to+"&appKey="+appKey+"&salt="+salt+"&sign="+sign
-      url = URI.escape(url)
-      begin
-        response = HTTParty.get(url)
-        if (response.parsed_response["basic"] == nil) || !(/[a-zA-Z-]/ =~ q)
-          flash[:danger] = "不存在该英文单词"
-          redirect_to root_path
-        else
-          @word = current_user.words.create(
-            name: q,
-            chinese: response.parsed_response["basic"]["explains"].map{|str| str.gsub(/\s+/, "")}.join(" "),
-            us: response.parsed_response["basic"]["us-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["us-phonetic"]+"]",
-            uk: response.parsed_response["basic"]["uk-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["uk-phonetic"]+"]"
-          )
-          redirect_to word_path(@word)
-        end
-      rescue SocketError
-        flash[:danger] = "查询功能暂时不能用"
+      response = Word.translate(name)
+      if response == "net_error" 
+        flash[:danger] = "翻译功能暂时不能用"
         redirect_to root_path
+      elsif (response.parsed_response["basic"] == nil) || !(/[a-zA-Z-]/ =~ name)
+        flash[:danger] = "不存在该英文单词"
+        redirect_to root_path
+      else
+        @word = current_user.words.create(
+          name: name,
+          chinese: response.parsed_response["basic"]["explains"].map{|str| str.gsub(/\s+/, "")}.join(" "),
+          us: response.parsed_response["basic"]["us-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["us-phonetic"]+"]",
+          uk: response.parsed_response["basic"]["uk-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["uk-phonetic"]+"]"
+        )
+        redirect_to word_path(@word)
       end
     end
   end
