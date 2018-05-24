@@ -23,11 +23,6 @@ class WordsController < ApplicationController
     render 'index'
   end
 
-  def familiar
-    @words = current_user.words.where(status: true).page(params[:page])
-    render 'index'
-  end
-
   def unfamiliar
     @words = current_user.words.where(status: false).page(params[:page])
     render 'index'

@@ -7,7 +7,7 @@
 
 <div class="text-center mb-4">
   <%= link_to "陌生", unfamiliar_words_path, class: "badge badge-danger" %>
-  <%= link_to "熟悉", familiar_words_path, class: "badge badge-success" %>
+  <%= link_to "全部", words_path, class: "badge badge-success" %>
   <% current_user.tags.each do |tag| %>
     <%= link_to "#{tag.name}", tags_words_path(tag_id: tag.id), class: "badge badge-success" %>
   <% end %>
@@ -23,9 +23,9 @@
         <td class="text-right">
           <span id="<%= word.id %>-status">
             <% if word.status? %>
-              <%= link_to "设为陌生", status_word_path(word), class: "badge badge-danger", remote: true%>
+              <%= link_to "标记", status_word_path(word), class: "badge badge-danger", remote: true%>
             <% else %>
-              <%= link_to "设为熟悉", status_word_path(word), class: "badge badge-success", remote: true%>
+              <%= link_to "取消标记", status_word_path(word), class: "badge badge-success", remote: true%>
             <% end -%>
           </span>
           <button class="badge badge-primary" data-toggle="modal" data-target="#<%=word.id %>-modal">显示</button>

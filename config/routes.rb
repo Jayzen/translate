@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     get 'search', on: :collection
     get 'interpret', on: :collection
     get 'status', on: :member
-    get 'familiar', on: :collection
     get 'unfamiliar', on: :collection
     get 'tags', on: :collection
     delete :remove_select, on: :collection
