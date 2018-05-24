@@ -15,7 +15,7 @@
         <tr>
           <td class="text-left text-secondary">
             <%= check_box_tag "[word_ids][]", word.id, false, class: "selectable" %>
-            <%= index+1 %>. &nbsp<%= word.name %>
+            <%= index+((params[:page] || 1).to_i - 1)*10+1 %>. &nbsp<%= word.name %>
           </td>
           <td class="text-right">
             <%= link_to '编辑', edit_word_path(word), class: "badge badge-primary" %>
