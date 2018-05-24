@@ -14,9 +14,11 @@
 </div>
 <table class="table table-sm bg-white mb-1">
   <tbody>
-    <% @words.each do |word| %>
+    <% @words.each_with_index do |word, index| %>
       <tr>
-        <td class="text-left text-secondary"><%= word.name %>  <span class="badge badge-danger" id="<%= word.id %>-status-explain"><%= word.status == false ? "陌生" : ""%></span></td>
+        <td class="text-left text-secondary">
+          <%= index+((params[:page] || 1).to_i - 1)*10+1 %>. &nbsp
+          <%= word.name %>  <span class="badge badge-danger" id="<%= word.id %>-status-explain"><%= word.status == false ? "陌生" : ""%></span></td>
         <td></td>
         <td class="text-right">
           <span id="<%= word.id %>-status">
