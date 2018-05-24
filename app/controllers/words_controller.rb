@@ -3,11 +3,11 @@ class WordsController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @words = current_user.words.order("created_at desc").page(params[:page])
+    @words = current_user.words.order("updated_at desc").page(params[:page])
   end
   
   def lists
-    @words = current_user.words.order("created_at desc").page(params[:page])
+    @words = current_user.words.order("updated_at desc").page(params[:page])
   end
 
   def status
@@ -40,8 +40,18 @@ class WordsController < ApplicationController
 
   def interpret
     name = params[:name].strip
-    if @word = Word.find_by(name: name)
-      current_user.words << @word
+    if @word  = current_user.words.find_by(name: name)
+      @word.update(updated_at: Time.now)
+      redirect_to word_path(@word)
+    elsif @word  = Word.find_by(name: name)
+      @word = current_user.words.create(
+        name: @word.name,
+        uk: @word.uk,
+        us: @word.us,
+        chinese: @word.chinese,
+        uk_voice: @word.uk_voice,
+        us_voice: @word.us_voice
+        )
       redirect_to word_path(@word)
     else
       response = Word.translate(name)
@@ -56,7 +66,9 @@ class WordsController < ApplicationController
           name: name,
           chinese: response.parsed_response["basic"]["explains"].map{|str| str.gsub(/\s+/, "")}.join(" "),
           us: response.parsed_response["basic"]["us-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["us-phonetic"]+"]",
-          uk: response.parsed_response["basic"]["uk-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["uk-phonetic"]+"]"
+          uk: response.parsed_response["basic"]["uk-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["uk-phonetic"]+"]",
+          uk_voice: response.parsed_response["basic"]["uk-speech"],
+          us_voice: response.parsed_response["basic"]["us-speech"]
         )
         redirect_to word_path(@word)
       end
@@ -97,6 +109,17 @@ class WordsController < ApplicationController
     @word.destroy
     flash[:success] = "单词删除成功"
     redirect_to words_lists_path
+  end
+
+  def remove_select
+    unless params[:word_ids].nil?
+      current_user.words.where(id: params[:word_ids]).destroy_all
+      redirect_to words_lists_path
+      flash[:success] = '选中的单词被全部删除!'
+    else
+      redirect_to words_lists_path
+      flash[:danger] = "单词未被选择!"
+    end
   end
 
   private

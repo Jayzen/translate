@@ -3,9 +3,13 @@
     <%= @word.name %>
   </div>
   <div class="card-body">
-    <p class="card-text"><strong>美音音标:</strong> &nbsp&nbsp <%= @word.us %></p>
-    <p class="card-text"><strong>英音音标:</strong> &nbsp&nbsp <%= @word.uk %></p>
-    <p class="card-text"><strong>中文翻译:</strong> &nbsp&nbsp <%= @word.chinese %></p>
+    <p class="card-text"><strong>美音音标:</strong> <%= @word.us %>
+    <audio src="<%= @word.us_voice %>" controls="controls"></audio>
+   
+    <p class="card-text"><strong>英音音标:</strong> <%= @word.uk %>
+    <audio src="<%= @word.uk_voice %>" controls="controls"></audio>
+    <p class="card-text"><strong>中文翻译:</strong> <%= @word.chinese %></p>
+    
     <%= link_to "返回主页", root_path, class: "btn btn-sm btn-primary" %>
   </div>
 </div>

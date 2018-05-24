@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'familiar', on: :collection
     get 'unfamiliar', on: :collection
     get 'tags', on: :collection
+    delete :remove_select, on: :collection
   end
   root 'welcomes#index'
   get  '/login', to: 'sessions#new'

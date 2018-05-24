@@ -1,22 +1,38 @@
 <div class="col-md-9">
 <table class="table table-sm bg-white mb-1">
-  <thead>
-    <tr>
-      <th class="text-left text-secondary">单词</th>
-      <th class="text-right"><%= link_to "新建单词", new_word_path, class: "btn btn-sm btn-primary" %></th>
-    </tr>
-  </thead> 
-  <tbody>
-    <% @words.each do |word| %>
+  <%= form_tag remove_select_words_path, method: :delete do %>
+    <thead>
       <tr>
-        <td class="text-left text-secondary"><%= word.name %></td>
-        <td class="text-right">
-          <%= link_to '编辑', edit_word_path(word), class: "badge badge-success" %>
-          <%= link_to '删除', word, method: :delete, data: { confirm: '确定删除这个单词么?' }, class: "badge badge-danger" %>
-        </td>
+        <th class="text-left text-secondary">
+          <input type="checkbox" id="selectAll"><small>&nbsp全选或取消&nbsp</small></input>
+          <%= submit_tag "删除选中项", class: "btn btn-sm btn-danger", id: "remove_select" %>
+        </th>
+        <th class="text-right"><%= link_to "新建单词", new_word_path, class: "btn btn-sm btn-primary" %></th>
       </tr>
-    <% end %>
-  </tbody>
+    </thead> 
+    <tbody>
+      <% @words.each_with_index do |word, index| %>
+        <tr>
+          <td class="text-left text-secondary">
+            <%= check_box_tag "[word_ids][]", word.id, false, class: "selectable" %>
+            <%= index+1 %>. &nbsp<%= word.name %>
+          </td>
+          <td class="text-right">
+            <%= link_to '编辑', edit_word_path(word), class: "badge badge-primary" %>
+            <%= link_to '删除', word, method: :delete, data: { confirm: '确定删除这个单词么?' }, class: "badge badge-danger" %>
+          </td>
+        </tr>
+      <% end -%>
+    </tbody>
+  <% end -%>
 </table>
 <%= paginate @words %>
 </div>
+
+<%= content_for :javascripts do %>
+  <script>
+    $(document).ready(function () {
+        $("#selectAll").select_all();
+    });
+  </script>
+<% end %>
