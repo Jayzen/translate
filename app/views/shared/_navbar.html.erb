@@ -19,6 +19,7 @@
                 <% end %>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
+                <%= link_to "单词管理", words_lists_path, class: "dropdown-item text-secondary" %>
                 <%= link_to "基本设置", edit_user_path(current_user), class: "dropdown-item text-secondary" %>
                 <div class="dropdown-divider"></div>
                 <%= link_to "退出", logout_path, method: "delete", class: "dropdown-item text-secondary" %>
