@@ -3,7 +3,8 @@ class TagsController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @tags = current_user.tags.order("created_at desc")
+    @tags = current_user.tags.order("updated_at desc").page(params[:page])
+    @tag = current_user.tags.build
   end
 
   def show
@@ -19,27 +20,42 @@ class TagsController < ApplicationController
 
   def create
     @tag = current_user.tags.build(tag_params)
-    if @tag.save
-      flash[:success] = "单词分类创建成功"
-      redirect_to tags_path
-    else
-      render :new
-    end
+  
+    respond_to do |format|
+      if @tag.save
+        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
+        format.json { render :show, status: :created, location: @tag }
+        format.js
+      else
+        format.html { render :new }
+        format.json { render json: @tag.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end 
   end
 
   def update
-    if @tag.update(tag_params)
-      flash[:success] = "单词分类更新成功"
-      redirect_to tags_path
-    else
-      render :new
-    end
+    respond_to do |format|
+      if @tag.update(tag_params)
+        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+        format.json { render :show, status: :ok, location: @tag }
+        format.js
+      else
+        format.html { render :edit }
+        format.json { render json: @tag.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end 
   end
 
   def destroy
     @tag.destroy
-    flash[:success] = "单词分类删除成功"
-    redirect_to tags_path
+
+    respond_to do |format|
+      format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
+      format.json { head :no_content }
+      format.js
+    end 
   end
 
   private

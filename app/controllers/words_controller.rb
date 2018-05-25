@@ -106,17 +106,6 @@ class WordsController < ApplicationController
     redirect_to words_lists_path
   end
 
-  def remove_select
-    unless params[:word_ids].nil?
-      current_user.words.where(id: params[:word_ids]).destroy_all
-      redirect_to words_lists_path
-      flash[:success] = '选中的单词被全部删除!'
-    else
-      redirect_to words_lists_path
-      flash[:danger] = "单词未被选择!"
-    end
-  end
-
   private
     def set_word
       @word = current_user.words.find(params[:id])

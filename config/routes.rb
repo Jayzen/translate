@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'words#index'
   get "words/lists", to: "words#lists"
   resources :words do
     get 'search', on: :collection
@@ -6,9 +7,7 @@ Rails.application.routes.draw do
     get 'status', on: :member
     get 'unfamiliar', on: :collection
     get 'tags', on: :collection
-    delete :remove_select, on: :collection
   end
-  root 'welcomes#index'
   get  '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get "/auth/:provider/callback" => "sessions#create"

@@ -1,0 +1,5 @@
+$('#edit-<%= @tag.id %>').modal('hide');
+$('#tag-<%= @tag.id %>').fadeOut(500, function(){
+  $(this).remove();
+  $('#container_tags').prepend('<%= j render @tag %>');
+})

@@ -1,3 +1,4 @@
 <% if @word.status == false %>
-  <span class='badge badge-danger'>陌生</span>
+  <span class='badge badge-danger' id="<%= @word.id %>-status-explain">标记</span>
+<% else %>
 <% end %>

@@ -1,20 +1,9 @@
 <div class="col-md-9">
-<table class="table table-sm bg-white mb-1">
-  <%= form_tag remove_select_words_path, method: :delete do %>
-    <thead>
-      <tr>
-        <th class="text-left text-secondary">
-          <input type="checkbox" id="selectAll"><small>&nbsp全选或取消&nbsp</small></input>
-          <%= submit_tag "删除选中项", class: "btn btn-sm btn-danger", id: "remove_select" %>
-        </th>
-        <th class="text-right"><%= link_to "新建单词", new_word_path, class: "btn btn-sm btn-primary" %></th>
-      </tr>
-    </thead> 
+  <table class="table table-sm bg-white mb-1">
     <tbody>
       <% @words.each_with_index do |word, index| %>
         <tr>
           <td class="text-left text-secondary">
-            <%= check_box_tag "[word_ids][]", word.id, false, class: "selectable" %>
             <%= index+((params[:page] || 1).to_i - 1)*10+1 %>. &nbsp<%= word.name %>
           </td>
           <td class="text-right">
@@ -24,15 +13,9 @@
         </tr>
       <% end -%>
     </tbody>
-  <% end -%>
-</table>
-<%= paginate @words %>
+  </table>
+  <div class="d-flex flex-row justify-content-between">
+    <div><%= paginate @words %></div>
+    <div><%= link_to "新建单词", new_word_path, class: "btn btn-sm btn-primary" %></div>
+  </div>
 </div>
-
-<%= content_for :javascripts do %>
-  <script>
-    $(document).ready(function () {
-        $("#selectAll").select_all();
-    });
-  </script>
-<% end %>

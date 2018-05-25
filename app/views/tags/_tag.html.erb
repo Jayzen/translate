@@ -1,0 +1,31 @@
+<tr id="tag-<%= tag.id %>">
+  <td class="text-left text-secondary">
+    1. &nbsp<%= tag.name %>
+  </td>
+  <td class="text-right">
+    <span class="badge badge-primary" data-toggle="modal" data-target="#edit-<%= tag.id %>">
+      编辑
+    </span>
+    <%= link_to "删除", tag, method: :delete, remote: true, data: { confirm: "确定删除么?" }, class: "badge badge-danger" %>
+  </td>
+  <%= form_for(tag, method: 'put', remote: true) do |f| %>
+    <div class="modal fade" id="edit-<%= tag.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label text-secondary">名称:</label>
+              <div class="col-sm-10">
+                <%= f.text_field :name, class: "form-control", autofocus: true %>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">关闭</button>
+            <%= f.submit "更新单词分类", class: "btn btn-primary btn-sm"%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end -%>
+</tr>

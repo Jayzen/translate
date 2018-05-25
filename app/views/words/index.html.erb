@@ -1,15 +1,17 @@
-<%= form_tag '/words/search', method: :get do %>
+<%= form_tag '/words/interpret', method: :get do %>
   <p class="text-center">
-    <%= text_field_tag :search %>
-    <%= submit_tag "查询", class: "btn btn-sm btn-primary" %>
+    <%= text_field_tag :name %>
+    <%= submit_tag "翻译/查询", class: "btn btn-sm btn-primary" %>
   </p>
-<% end %>
+<% end -%>
 
 <div class="text-center mb-3">
-  <%= link_to "陌生", unfamiliar_words_path, class: "badge badge-danger" %>
+  <%= link_to "标记", unfamiliar_words_path, class: "badge badge-danger" %>
   <%= link_to "全部", words_path, class: "badge badge-success" %>
-  <% current_user.tags.each do |tag| %>
-    <%= link_to "#{tag.name}", tags_words_path(tag_id: tag.id), class: "badge badge-success" %>
+  <% current_user.tags.includes(:words).each do |tag| %>
+    <% unless tag.words.length == 0 %>
+      <%= link_to "#{tag.name}", tags_words_path(tag_id: tag.id), class: "badge badge-success" %>
+    <% end %>  
   <% end %>
 </div>
 <table class="table table-sm bg-white mb-1">
@@ -18,7 +20,11 @@
       <tr>
         <td class="text-left text-secondary">
           <%= index+((params[:page] || 1).to_i - 1)*10+1 %>. &nbsp
-          <%= word.name %>  <span class="badge badge-danger" id="<%= word.id %>-status-explain"><%= word.status == false ? "陌生" : ""%></span></td>
+          <%= word.name %>
+          <span id="<%= word.id %>-status-explain">
+            <span class="badge badge-danger"><%= word.status == false ? "标记" : ""%></span>
+          </span>
+        </td>
         <td></td>
         <td class="text-right">
           <span id="<%= word.id %>-status">
@@ -28,7 +34,7 @@
               <%= link_to "取消标记", status_word_path(word), class: "badge badge-success", remote: true%>
             <% end -%>
           </span>
-          <button class="badge badge-primary" data-toggle="modal" data-target="#<%=word.id %>-modal">显示</button>
+          <button class="badge badge-primary" data-toggle="modal" data-target="#<%=word.id %>-modal">翻译</button>
         </td>
       </tr>
     <% end %>

@@ -1,0 +1,5 @@
+$('#new-tag').modal('hide');
+$('.tag_name').val('');
+$('#container_tags').prepend('<%= j render @tag %>');
+
+$('#tag-<%= @tag.id %>').hide().fadeIn(1000);

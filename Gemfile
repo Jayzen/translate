@@ -37,7 +37,6 @@ gem 'mysql2', '~> 0.4.4'
 gem 'omniauth-github'
 gem 'redis-rails'
 gem 'httparty'
-gem 'select_all-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

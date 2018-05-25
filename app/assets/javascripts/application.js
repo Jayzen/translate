@@ -18,4 +18,3 @@
 //= require bootstrap
 //= require jcrop
 //= require avatar
-//= require select_all.js
