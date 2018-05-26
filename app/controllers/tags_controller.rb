@@ -23,12 +23,10 @@ class TagsController < ApplicationController
   
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
-        format.json { render :show, status: :created, location: @tag }
+        format.html { redirect_to tags_path, success: '单词分类创建成功' }
         format.js
       else
-        format.html { render :new }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
+        format.html { redirect_to tags_path }
         format.js
       end
     end 
@@ -37,12 +35,10 @@ class TagsController < ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tag }
+        format.html { redirect_to tags_path, success: '单词分类更新成功' }
         format.js
       else
-        format.html { render :edit }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
+        format.html { redirect_to tags_path }
         format.js
       end
     end 
