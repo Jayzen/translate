@@ -1,11 +1,11 @@
-<%= form_tag '/words/interpret', method: :get do %>
-  <p class="text-center">
+<%= form_tag '/words/interpret', method: :get do %>  
+  <div class="text-center">
     <%= text_field_tag :name %>
     <%= submit_tag "翻译/查询", class: "btn btn-sm btn-primary" %>
-  </p>
+  </div>  
 <% end -%>
 
-<div class="text-center mb-3">
+<div class="text-center mb-3 mt-2">
   <%= link_to "标记", unfamiliar_words_path, class: "badge badge-danger" %>
   <%= link_to "全部", words_path, class: "badge badge-success" %>
   <% current_user.tags.includes(:words).each do |tag| %>

@@ -1,0 +1,21 @@
+<table class="table table-sm bg-white mb-1">
+  <thead>
+    <tr>
+      <td class="text-left text-primary"><strong>代完成清单</strong></td>
+      <td class="text-right text-secondary"></td>
+    </tr>
+  </thead> 
+  <tbody id="incomplete_tasks">
+    <% @incomplete_tasks.each_with_index do |task, index| %>
+      <tr id="edit_task_<%= task.id%>">
+        <td class="text-left text-secondary">
+          <%= index+((params[:page] || 1).to_i - 1)*10+1 %>. &nbsp<%= task.name %>
+        </td>
+        <td class="text-right text-secondary">
+          <%= link_to "标记", task, method: :put, remote: true, class: "badge badge-danger"%>
+          <%= link_to "删除", task, method: :delete, data: {confirm: "Are you sure?"}, remote: true, class: "badge badge-danger" %>
+        </td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>

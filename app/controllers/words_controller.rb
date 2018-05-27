@@ -96,7 +96,7 @@ class WordsController < ApplicationController
       flash[:success] = "单词更新成功"
       redirect_to words_lists_path
     else
-      render :edit
+      render :new
     end
   end
 
@@ -105,6 +105,17 @@ class WordsController < ApplicationController
     flash[:success] = "单词删除成功"
     redirect_to words_lists_path
   end
+
+  def remove_select
+    unless params[:word_ids].nil?
+      current_user.words.where(id: params[:word_ids]).destroy_all #不能使用delete_all,其不会更新关联项
+      redirect_to words_lists_path
+      flash[:success] = '选中的单词被全部删除!'
+    else
+      redirect_to words_lists_path
+      flash[:danger] = "单词未被选择!"
+    end
+  end 
 
   private
     def set_word
