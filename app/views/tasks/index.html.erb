@@ -7,11 +7,13 @@
         单词计划清单
       </div>
       <div class="card-body">
-        <div class="text-center mb-4">
+        <div class="text-center">
           <%= link_to "创建单词计划", new_task_path, id: "new_link", remote: true, class: "btn btn-primary" %>
         </div>
-        <%= render 'incomplete_tasks' %>
-        <%= render 'complete_tasks' %>
+        <div class="mt-4">
+          <%= render 'incomplete_tasks' %>
+          <%= render 'complete_tasks' %>
+        </div>  
       </div>
     </div>
   </div>

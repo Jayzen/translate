@@ -3,7 +3,7 @@
     1. &nbsp<%= task.name %>
   </td>
   <td class="text-right text-secondary">
-    <%= link_to "标记", task, method: :put, remote: true, class: "badge badge-danger"%>
+    <%= link_to "标记", task, method: :put, remote: true, class: "badge badge-primary"%>
     <%= link_to "删除", task, method: :delete, data: {confirm: "Are you sure?"}, remote: true, class: "badge badge-danger" %>
   </td>
 </tr>
