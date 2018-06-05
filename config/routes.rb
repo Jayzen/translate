@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   resources :users, :password_alters, :set_templates, :set_modules, only: [:edit, :update]
   resources :portraits, only: [:new, :create, :update] 
-  resources :tags
+  resources :tags do
+    get 'set_weight', on: :member
+  end
   resources :tasks
 end

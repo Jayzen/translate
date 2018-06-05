@@ -8,8 +8,12 @@
              <tr id="tag-<%= tag.id %>">
                <td class="text-left text-secondary">
                  <%= index+((params[:page] || 1).to_i - 1)*10+1 %>. &nbsp<%= tag.name %>
+                 <% if current_user.tags.first == tag %>
+                   <span class="badge badge-danger">第一权重</span>
+                 <% end %>
                </td>
                <td class="text-right">
+                 <%= link_to "更新权重", set_weight_tag_path(tag), class: "badge badge-primary" %>
                  <span class="badge badge-primary" data-toggle="modal" data-target="#edit-<%= tag.id %>">
                    编辑
                  </span>

@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  before_action :set_tag, only: [:show, :edit, :update, :destroy, :set_weight]
   before_action :logged_in_user
 
   def index
@@ -42,6 +42,12 @@ class TagsController < ApplicationController
         format.js
       end
     end 
+  end
+
+  def set_weight
+    @tag.update(updated_at: Time.now)
+    flash[:success] = "更新权重成功"
+    redirect_to tags_path
   end
 
   def destroy
