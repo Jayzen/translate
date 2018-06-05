@@ -24,12 +24,12 @@ class WordsController < ApplicationController
   end
 
   def unfamiliar
-    @words = current_user.words.where(status: false).page(params[:page])
+    @words = current_user.words.order("updated_at desc").where(status: false).page(params[:page])
     render 'index'
   end
 
   def tags
-    @words = current_user.words.where(tag_id: params[:tag_id]).page(params[:page])
+    @words = current_user.words.order("updated_at desc").where(tag_id: params[:tag_id]).page(params[:page])
     render 'index'
   end
 

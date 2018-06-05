@@ -1,8 +1,14 @@
 <%= form_tag '/words/interpret', method: :get do %>  
-  <div class="text-center">
-    <%= collection_select :word, :tag_id, current_user.tags, :id, :name, {include_blank: 'None'} %>
-    <%= text_field_tag :name %>
-    <%= submit_tag "翻译/查询", class: "btn btn-sm btn-primary" %>
+  <div class="form-row d-flex flex-row justify-content-center">
+    <div class="form-group col-md-2">
+      <%= collection_select :word, :tag_id, current_user.tags, :id, :name, { include_blank: 'None' }, { class: "form-control" } %>
+    </div>
+    <div class="form-group col-md-3">
+      <%= text_field_tag :name, nil, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= submit_tag "翻译/查询", class: "btn btn-primary form-control" %>
+    </div>  
   </div>  
 <% end -%>
 
