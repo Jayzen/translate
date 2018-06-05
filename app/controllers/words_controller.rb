@@ -35,8 +35,9 @@ class WordsController < ApplicationController
 
   def interpret
     name = params[:name].strip
+    tag_id = params[:word][:tag_id]
     if @word  = current_user.words.find_by(name: name)
-      @word.update(updated_at: Time.now)
+      @word.update(updated_at: Time.now, tag_id: tag_id)
       redirect_to word_path(@word)
     elsif @word  = Word.find_by(name: name)
       @word = current_user.words.create(
@@ -45,8 +46,9 @@ class WordsController < ApplicationController
         us: @word.us,
         chinese: @word.chinese,
         uk_voice: @word.uk_voice,
-        us_voice: @word.us_voice
-        )
+        us_voice: @word.us_voice,
+        tag_id: tag_id
+      )
       redirect_to word_path(@word)
     else
       response = Word.translate(name)
@@ -59,6 +61,7 @@ class WordsController < ApplicationController
       else
         @word = current_user.words.create(
           name: name,
+          tag_id: tag_id,
           chinese: response.parsed_response["basic"]["explains"].map{|str| str.gsub(/\s+/, "")}.join(" "),
           us: response.parsed_response["basic"]["us-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["us-phonetic"]+"]",
           uk: response.parsed_response["basic"]["uk-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["uk-phonetic"]+"]",

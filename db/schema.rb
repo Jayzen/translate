@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2018_05_26_083335) do
     t.string "uk_voice"
     t.string "us_voice"
     t.index ["name"], name: "index_words_on_name"
-    t.index ["tag_id"], name: "index_words_on_tag_id", unique: true
+    t.index ["tag_id"], name: "index_words_on_tag_id"
     t.index ["user_id"], name: "index_words_on_user_id"
   end
 

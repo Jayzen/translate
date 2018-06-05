@@ -1,5 +1,6 @@
 <%= form_tag '/words/interpret', method: :get do %>  
   <div class="text-center">
+    <%= collection_select :word, :tag_id, current_user.tags, :id, :name, {include_blank: 'None'} %>
     <%= text_field_tag :name %>
     <%= submit_tag "翻译/查询", class: "btn btn-sm btn-primary" %>
   </div>  
