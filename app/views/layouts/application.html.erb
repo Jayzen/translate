@@ -2,8 +2,8 @@
 <html>
   <head>
     <title><%= full_title(yield(:title)) %></title>
-    <link rel="icon" href='<i class="fa fa-check fa-fw"></i>'>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= favicon_link_tag 'book.ico' %>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
