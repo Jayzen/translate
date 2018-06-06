@@ -3,7 +3,7 @@ class TagsController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @tags = current_user.tags.order("updated_at desc").page(params[:page])
+    @tags = current_user.tags.unscoped.order("updated_at desc").page(params[:page])
     @tag = current_user.tags.build
   end
 
@@ -45,7 +45,7 @@ class TagsController < ApplicationController
   end
 
   def set_weight
-    @tag.update(updated_at: Time.now)
+    @tag.update(weight: Time.now)
     flash[:success] = "更新权重成功"
     redirect_to tags_path
   end
