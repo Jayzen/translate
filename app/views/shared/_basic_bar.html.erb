@@ -21,6 +21,11 @@
             </button>
           </a>
         <% end %>
+        <a href="<%= csvs_path %>">
+          <button type="button" class="btn <%= controller_name == 'csvs' ? 'btn-primary' : 'btn-outline-secondary' %> btn-block mt-2">
+            <i class="fa fa-file fa-fw"></i> 数据管理
+          </button>
+        </a>
       </div>
     </div>
 </div>

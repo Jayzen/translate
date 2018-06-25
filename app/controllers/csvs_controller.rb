@@ -1,4 +1,6 @@
 class CsvsController < ApplicationController
+  before_action :logged_in_user
+  
   def index
     @words = current_user.words
     respond_to do |format|
