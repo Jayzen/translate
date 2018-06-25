@@ -1,0 +1,56 @@
+<% provide(:title, "数据管理") %>
+<div class="row">
+  <%= render 'shared/word_bar' %>
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-header text-secondary text-center">
+        数据管理
+      </div>
+      <div class="card-body">
+        <%= form_tag import_csvs_path, multipart: true do %>
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <div class="d-flex flex-row row-hl">
+                <div class="item-hl">
+                  <a href="#", class="btn btn-sm text-secondary", id="button_trigger" >
+                    <i class="fa fa-upload fa-fw"></i> 点击上传
+                  </a>
+                </div>
+                <div class="item-hl">
+                  <p class="btn btn-sm text-secondary" id="upload_file"></p>
+                </div>
+              </div>
+              <%= file_field_tag :file, class: "form-control text-secondary", hidden: true %>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <%= submit_tag "上传csv数据", class: "btn btn-primary btn-sm" %>
+              <%= link_to "下载csv数据", csvs_path(format: "csv"), class: 'btn btn-primary btn-sm' %>
+            </div> 
+          </div>
+        <% end %> 
+      </div>
+    </div>
+  </div> 
+</div>
+
+<%= content_for :javascripts do %>
+  <script>
+    $(document).ready(function(){
+      var fileSelect = document.getElementById("button_trigger"),
+          fileElem = document.getElementById("file");
+      fileSelect.addEventListener("click", function (e) {
+        if (fileElem) {
+          fileElem.click();
+        }
+        e.preventDefault(); // prevent navigation to "#"
+      }, false);
+      
+      $("#file").change(function(){
+        $("#upload_file").text($("#file").val());
+      })
+    });
+  </script>
+<% end %>

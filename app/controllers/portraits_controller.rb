@@ -6,6 +6,7 @@ class PortraitsController < ApplicationController
   end
 
   def create
+    debugger
     @user = User.find(params[:user_id])
     if params[:portrait].nil? 
       @user.errors.add(:avatar, "头像必须上传")

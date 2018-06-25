@@ -19,4 +19,7 @@ Rails.application.routes.draw do
     get 'set_weight', on: :member
   end
   resources :tasks
+  resources :csvs do
+    post 'import', on: :collection
+  end
 end

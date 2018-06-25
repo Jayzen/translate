@@ -1,5 +1,5 @@
 class Word < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :tag, optional: true
   validates :name, presence: {message: "单词不能为空"}, uniqueness: {scope: :user_id, message: "已经存在该单词"}
 
@@ -13,6 +13,24 @@ class Word < ApplicationRecord
       response = HTTParty.get(url)
     rescue SocketError
       response = "net_error"
+    end
+  end
+
+  def self.import(file)
+    words = []
+    CSV.foreach(file.path, headers: true) do |row|
+      word_hash = row.to_hash
+      words << word_hash
+    end
+    words
+  end
+
+  def self.to_csv(fields = column_names, options = {})
+    CSV.generate(options) do |csv|
+      csv << fields
+      all.each do |word|
+        csv << word.attributes.values_at(*fields)
+      end
     end
   end
 end

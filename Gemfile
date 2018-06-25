@@ -38,7 +38,7 @@ gem 'omniauth-github'
 gem 'redis-rails'
 gem 'httparty'
 gem 'select_all-rails'
-
+gem 'csv'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -23,10 +23,10 @@
           <%= submit_tag "删除选中项", data: { confirm: "确定全部删除么？"}, class: "btn btn-sm btn-danger", id: "remove_select" %>
         <% end %>
       </div>
-      <div><%= paginate @words %></div>
       <div><%= link_to "新建单词", new_word_path, class: "btn btn-sm btn-primary" %></div>
     </div>
   <% end -%>
+  <div class="mt-1"><%= paginate @words %></div>
 </div>
 
 <%= content_for :javascripts do %>
