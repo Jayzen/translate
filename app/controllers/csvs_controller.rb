@@ -11,8 +11,13 @@ class CsvsController < ApplicationController
     if !params[:file].nil? && params[:file].path =~ /.+\.csv$/
       words = Word.import(params[:file])
       words.each do |word|
-        new_word = current_user.words.find_or_create_by(word)
-        new_word.update(updated_at: Time.now)
+        begin
+          new_word = current_user.words.find_or_create_by(word)
+          new_word.update(updated_at: Time.now)
+        rescue ActiveRecord::StatementInvalid
+          flash[:danger] = "csv文件内容不正确"
+          redirect_to csvs_path and return 
+        end
       end
       flash[:success] = "csv文件导入成功"
     else
