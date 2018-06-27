@@ -7,8 +7,8 @@ class WordsController < ApplicationController
   end
 
   def autocomplete
-    debugger
-    @words = current_user.words.where(name: "name").order("created_at desc").page(params[:page])
+    @words = current_user.words.where(["name like ?", "%#{params[:term]}%"])
+      .order("created_at desc").page(params[:page])
   end
 
   def lists
