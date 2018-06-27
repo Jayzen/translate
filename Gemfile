@@ -39,6 +39,7 @@ gem 'redis-rails'
 gem 'httparty'
 gem 'select_all-rails'
 gem 'csv'
+gem 'jquery-ui-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -1,4 +1,21 @@
+/*
+*= require jquery-ui/autocomplete
+*= require jquery-ui/menu
+*/
+
 @import "bootstrap";
 @import "font-awesome";
 @import "jcrop";
+
 a:hover { text-decoration:none;}
+
+.ui-autocomplete {
+  position: relative;
+  cursor: default;
+  z-index: 9999 !important;
+  width: 196px;
+}
+
+.ui-helper-hidden-accessible { 
+  display:none; 
+}

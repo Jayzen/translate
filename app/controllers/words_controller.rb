@@ -5,7 +5,12 @@ class WordsController < ApplicationController
   def index
     @words = current_user.words.order("updated_at desc").page(params[:page])
   end
-  
+
+  def autocomplete
+    debugger
+    @words = current_user.words.where(name: "name").order("created_at desc").page(params[:page])
+  end
+
   def lists
     @words = current_user.words.order("updated_at desc").page(params[:page])
   end
@@ -16,11 +21,6 @@ class WordsController < ApplicationController
     respond_to do |format|
       format.js
     end
-  end
-
-  def search
-    @words = current_user.words.where(name: params[:search].strip).page(params[:page])
-    render 'index'
   end
 
   def unfamiliar

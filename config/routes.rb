@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'words#index'
   get "words/lists", to: "words#lists"
   resources :words do
-    get 'search', on: :collection
+    get 'autocomplete', on: :collection
     get 'interpret', on: :collection
     get 'status', on: :member
     get 'unfamiliar', on: :collection

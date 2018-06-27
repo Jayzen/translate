@@ -18,3 +18,8 @@
 //= require jcrop
 //= require avatar
 //= require select_all.js
+//= require jquery-ui/core
+//= require jquery-ui/widget
+//= require jquery-ui/position
+//= require jquery-ui/widgets/autocomplete
+//= require jquery-ui/widgets/menu
