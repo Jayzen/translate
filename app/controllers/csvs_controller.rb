@@ -10,20 +10,21 @@ class CsvsController < ApplicationController
   end
 
   def import
-    if !params[:file].nil? && params[:file].path =~ /.+\.csv$/
+    if params[:file].nil?
+      flash[:danger] = "不能上传空文件"
+    elsif !params[:file].nil? && params[:file].path !~ /.+\.csv$/
+      flash[:danger] = "只能上传csv格式的文件"
+    else !params[:file].nil? && params[:file].path =~ /.+\.csv$/
       words = Word.import(params[:file])
       words.each do |word|
         begin
           new_word = current_user.words.find_or_create_by(word)
           new_word.update(updated_at: Time.now)
+          flash[:success] = "csv文件上传成功"
         rescue ActiveRecord::StatementInvalid
           flash[:danger] = "csv文件内容不正确"
-          redirect_to csvs_path and return 
         end
       end
-      flash[:success] = "csv文件导入成功"
-    else
-      flash[:danger] = "csv文件格式不正确"
     end
     redirect_to csvs_path
   end
