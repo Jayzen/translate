@@ -9,10 +9,10 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
-//= require rails-ujs
+
+//= require jquery
+//= require jquery_ujs
 //= require activestorage
-//= require jquery3
 //= require popper
 //= require bootstrap
 //= require jcrop
@@ -23,3 +23,30 @@
 //= require jquery-ui/position
 //= require jquery-ui/widgets/autocomplete
 //= require jquery-ui/widgets/menu
+//= require url
+//= require spin
+//= require jquery.spin
+//= require ajax_period
+//= require toastr
+
+$(document).ready(function() {
+  $('#form-modal-save-btn').click(function() {
+    $('#form-modal-body').find('form').submit();
+  });
+
+
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "positionClass": "toast-top-right",
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "2000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+})

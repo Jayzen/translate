@@ -1,0 +1,26 @@
+<table class="table table-sm bg-white mb-1">
+  <tbody>
+    <% @words.each_with_index do |word, index| %>
+      <tr>
+        <td class="text-left text-secondary">
+          <%= index+((params[:page] || 1).to_i - 1)*10+1 %>. &nbsp
+          <%= word.name %>
+          <span id="<%= word.id %>-status-explain">
+            <span class="badge badge-danger"><%= word.status == false ? "标记" : ""%></span>
+          </span>
+        </td>
+        <td></td>
+        <td class="text-right">
+          <span id="<%= word.id %>-status">
+            <% if word.status? %>
+              <%= link_to "标记", status_word_path(word), class: "badge badge-danger", remote: true%>
+            <% else %>
+              <%= link_to "取消标记", status_word_path(word), class: "badge badge-success", remote: true%>
+            <% end -%>
+          </span>
+          <button class="badge badge-primary" data-toggle="modal" data-target="#<%=word.id %>-modal">翻译</button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

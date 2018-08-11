@@ -1,7 +1,7 @@
 <%= form_tag '/words/interpret', method: :get do %>  
   <div class="form-row d-flex flex-row justify-content-center">
     <div class="form-group col-md-2">
-      <%= collection_select :word, :tag_id, current_user.tags, :id, :name, {}, { class: "form-control" } %>
+      <%= collection_select :word, :category_id, current_user.categories, :id, :name, {}, { class: "form-control" } %>
     </div>
     <div class="form-group col-md-3">
       <%= text_field_tag :name, params[:name], class: "form-control", autocomplete: "off"  %>
@@ -15,39 +15,20 @@
 <div class="text-center mb-3 mt-2">
   <%= link_to "标记", unfamiliar_words_path, class: "badge badge-danger" %>
   <%= link_to "全部", words_path, class: "badge badge-success" %>
-  <% current_user.tags.includes(:words).each do |tag| %>
-    <% unless tag.words.length == 0 %>
-      <%= link_to "#{tag.name}", tags_words_path(tag_id: tag.id), class: "badge badge-success" %>
+  <% current_user.categories.includes(:words).each do |category| %>
+    <% unless category.words.length == 0 %>
+      <%= link_to "#{category.name}", categories_words_path(category_id: category.id), class: "badge badge-success" %>
     <% end %>  
   <% end %>
 </div>
-<table class="table table-sm bg-white mb-1">
-  <tbody>
-    <% @words.each_with_index do |word, index| %>
-      <tr>
-        <td class="text-left text-secondary">
-          <%= index+((params[:page] || 1).to_i - 1)*10+1 %>. &nbsp
-          <%= word.name %>
-          <span id="<%= word.id %>-status-explain">
-            <span class="badge badge-danger"><%= word.status == false ? "标记" : ""%></span>
-          </span>
-        </td>
-        <td></td>
-        <td class="text-right">
-          <span id="<%= word.id %>-status">
-            <% if word.status? %>
-              <%= link_to "标记", status_word_path(word), class: "badge badge-danger", remote: true%>
-            <% else %>
-              <%= link_to "取消标记", status_word_path(word), class: "badge badge-success", remote: true%>
-            <% end -%>
-          </span>
-          <button class="badge badge-primary" data-toggle="modal" data-target="#<%=word.id %>-modal">翻译</button>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @words %>
+
+<div id="words">
+  <%= render 'words' %>
+</div>
+
+<div id="paginator">
+  <%= paginate @words, remote: true %>
+</div>
 
 <% @words.each do |word| %>
   <div class="modal" id="<%= word.id%>-modal">

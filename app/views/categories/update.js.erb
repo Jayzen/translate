@@ -1,0 +1,3 @@
+$('#category-<%= @category.id %>').replaceWith('<%= j render(@category) %>');
+$('#form-modal').modal('hide');
+toastr['success']('单词分类更新成功!');

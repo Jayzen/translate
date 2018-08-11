@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get 'interpret', on: :collection
     get 'status', on: :member
     get 'unfamiliar', on: :collection
-    get 'tags', on: :collection
+    get 'categories', on: :collection
     delete :remove_select, on: :collection
   end
   get  '/login', to: 'sessions#new'
@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   resources :portraits, only: [:new, :create, :update] 
   resources :tags do
     get 'set_weight', on: :member
+  end
+  resources :categories do
+    get 'set_weight', on: :member
+    get 'delete', on: :member
   end
   resources :tasks
   resources :csvs, only: :index do

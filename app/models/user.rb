@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :words
   has_many :tags
   has_many :tasks
+  has_many :categories
 
   def downcase_email
     self.email = email.downcase

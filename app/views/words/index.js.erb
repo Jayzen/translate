@@ -1,0 +1,2 @@
+$('#words').html('<%= escape_javascript render "words" %>');
+$('#paginator').html('<%= escape_javascript paginate(@words, remote: true) %>');

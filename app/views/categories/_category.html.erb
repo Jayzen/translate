@@ -1,0 +1,12 @@
+<tr id="category-<%= category.id %>">
+  <td class="text-left text-secondary"><%= category.name %>
+    <% if current_user.categories.first == category %>
+      <span class="badge badge-danger">第一权重</span>
+    <%- end %>
+  </td>
+  <td class="text-right">
+    <%= link_to "更新权重", set_weight_category_path(category), remote: true, class: "badge badge-primary" %>
+    <%= link_to "编辑", edit_category_path(category), remote: true, class: "badge badge-primary" %>
+    <%= link_to "删除", delete_category_path(category), remote: true, class: "badge badge-danger" %>
+  </td>
+</tr>

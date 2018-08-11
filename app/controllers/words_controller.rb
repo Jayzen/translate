@@ -3,7 +3,7 @@ class WordsController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @words = current_user.words.order("updated_at desc").page(params[:page])
+    @words = current_user.words.order("updated_at desc").page(params[:page]).per(12)
   end
 
   def autocomplete
@@ -28,16 +28,16 @@ class WordsController < ApplicationController
     render 'index'
   end
 
-  def tags
-    @words = current_user.words.order("updated_at desc").where(tag_id: params[:tag_id]).page(params[:page])
+  def categories
+    @words = current_user.words.order("updated_at desc").where(category_id: params[:category_id]).page(params[:page])
     render 'index'
   end
 
   def interpret
     name = params[:name].strip
-    tag_id = params[:word][:tag_id]
+    category_id = params[:word][:category_id]
     if @word  = current_user.words.find_by(name: name)
-      @word.update(updated_at: Time.now, tag_id: tag_id)
+      @word.update(updated_at: Time.now, category_id: category_id)
       redirect_to word_path(@word)
     elsif @word  = Word.find_by(name: name)
       @word = current_user.words.create(
@@ -47,7 +47,7 @@ class WordsController < ApplicationController
         chinese: @word.chinese,
         uk_voice: @word.uk_voice,
         us_voice: @word.us_voice,
-        tag_id: tag_id
+        category_id: category_id
       )
       redirect_to word_path(@word)
     else
@@ -61,7 +61,7 @@ class WordsController < ApplicationController
       else
         @word = current_user.words.create(
           name: name,
-          tag_id: tag_id,
+          category_id: category_id,
           chinese: response.parsed_response["basic"]["explains"].map{|str| str.gsub(/\s+/, "")}.join(" "),
           us: response.parsed_response["basic"]["us-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["us-phonetic"]+"]",
           uk: response.parsed_response["basic"]["uk-phonetic"]==nil ? nil : "["+response.parsed_response["basic"]["uk-phonetic"]+"]",

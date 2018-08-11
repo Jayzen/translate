@@ -1,0 +1,11 @@
+<%= form_for(@category, html: { multipart: true }, remote: true, authenticity_token: true) do |f| %>
+  <div class="form-row">
+    <label class="col-sm-2 col-form-label text-secondary">名称:</label>
+    <div class="col-sm-8">
+      <%= f.text_field :name, class: "form-control #{'is-invalid' if has_error?(@category, :name)}" %>
+      <% if has_error?(@category, :name) %>
+        <div class="invalid-feedback d-block"><%= get_error(@category, :name) %></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
