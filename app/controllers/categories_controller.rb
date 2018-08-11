@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :logged_in_user
-  
+  before_action :find_category, only: [:edit, :update, :destroy, :delete, :set_weight]
+
   def index
     @categories = current_user.categories 
   end
@@ -17,26 +18,16 @@ class CategoriesController < ApplicationController
           @categories = current_user.categories
           render 'create', status: :created
         end
-        format.html do
-          flash[:success] = "Contact was successfully created."
-          redirect_to categories_path
-        end
       else
-         format.js { render 'new', status: :unprocessable_entity }
-         format.html do
-           flash[:error] = "Contact failed to be created."
-           render 'new'
-         end
+        format.js { render 'new', status: :unprocessable_entity }
       end
     end
   end
   
   def edit
-    @category = current_user.categories.find(params[:id])
   end
 
   def update
-    @category = current_user.categories.find(params[:id])
     respond_to do |format|
       if @category.update(category_params)
         format.js { render 'update', status: :ok}
@@ -47,7 +38,6 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = current_user.categories.find(params[:id])
     @category.destroy
     respond_to do |format|
       format.js { @categories = current_user.categories }
@@ -55,11 +45,9 @@ class CategoriesController < ApplicationController
   end
 
   def delete
-    @category = current_user.categories.find(params[:id])
   end
 
   def set_weight
-    @category = current_user.categories.find(params[:id])
     @category.update(weight: Time.now)
     respond_to do |format|
       format.js { @categories = current_user.categories }
@@ -69,5 +57,9 @@ class CategoriesController < ApplicationController
   private
     def category_params
       params.require(:category).permit(:name, :weight)
+    end
+
+    def find_category
+      @category = current_user.categories.find(params[:id])
     end
 end
