@@ -15,8 +15,14 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
   
     respond_to do |format|
-      @task.save
-      format.js
+      if @task.save
+        format.js do
+          render 'create', status: :created
+        end
+      else
+        format.js { render 'new', status: :unprocessable_entity }
+      end 
+    
     end 
   end
 

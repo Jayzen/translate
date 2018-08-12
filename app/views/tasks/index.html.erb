@@ -7,10 +7,10 @@
         单词计划清单
       </div>
       <div class="card-body">
-        <div class="text-center">
-          <%= link_to "创建单词计划", new_task_path, id: "new_link", remote: true, class: "btn btn-primary" %>
+        <div class="text-left">
+          <%= link_to "创建单词计划", new_task_path, remote: true, class: "btn btn-primary btn-sm" %>
         </div>
-        <div class="mt-4">
+        <div class="mt-1">
           <table class="table table-sm bg-white">
             <thead>
               <tr>
@@ -39,4 +39,5 @@
     </div>
   </div>
 </div>
+<%= render 'shared/form_modal' %>
 <%= render 'shared/confirm_modal' %>

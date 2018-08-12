@@ -9,14 +9,14 @@
             <i class="fa fa-book fa-fw"></i> 单词列表
           </button>
         </a> 
-        <a href="<%= tasks_path %>">
-          <button type="button" class="btn <%= controller_name == 'tasks' ? 'btn-primary' : 'btn-outline-secondary' %> btn-block mt-2">
-            <i class="fa fa-list fa-fw"></i> 单词计划
-          </button>
-        </a>
         <a href="<%= categories_path %>">
           <button type="button" class="btn <%= controller_name == 'categories' ? 'btn-primary' : 'btn-outline-secondary' %> btn-block mt-2">
             <i class="fa fa-tags fa-fw"></i> 单词分类
+          </button>
+        </a>
+        <a href="<%= tasks_path %>">
+          <button type="button" class="btn <%= controller_name == 'tasks' ? 'btn-primary' : 'btn-outline-secondary' %> btn-block mt-2">
+            <i class="fa fa-list fa-fw"></i> 单词计划
           </button>
         </a>
       </div>
