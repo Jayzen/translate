@@ -1,5 +1,6 @@
 <tr id="category-<%= category.id %>">
-  <td class="text-left text-secondary"><%= category.name %>
+  <td class="text-left text-secondary">
+    <%= category.name %>
     <% if current_user.categories.first == category %>
       <span class="badge badge-danger">第一权重</span>
     <%- end %>

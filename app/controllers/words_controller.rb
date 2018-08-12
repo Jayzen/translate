@@ -74,6 +74,10 @@ class WordsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.js { render 'show' }
+      format.html{ redirect_to word_path(@word) }
+    end
   end
 
   def new

@@ -11,10 +11,32 @@
           <%= link_to "创建单词计划", new_task_path, id: "new_link", remote: true, class: "btn btn-primary" %>
         </div>
         <div class="mt-4">
-          <%= render 'incomplete_tasks' %>
-          <%= render 'complete_tasks' %>
+          <table class="table table-sm bg-white">
+            <thead>
+              <tr>
+                <td class="text-left text-primary"><strong>待完成清单</strong></td>
+                <td class="text-right text-secondary"></td>
+              </tr>
+            </thead>
+            <tbody id="incomplete_tasks"> 
+              <%= render @incomplete_tasks %>
+            </tbody>
+          </table>
+          
+          <table class="table table-sm bg-white">
+            <thead>
+              <tr>
+                <td class="text-left text-primary"><strong>完成清单</strong></td>
+                <td class="text-right text-secondary"></td>
+              </tr>
+            </thead>
+            <tbody id="complete_tasks">
+              <%= render @complete_tasks %>
+            </tbody>
+          </table>
         </div>  
       </div>
     </div>
   </div>
 </div>
+<%= render 'shared/confirm_modal' %>

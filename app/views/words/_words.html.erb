@@ -18,7 +18,7 @@
               <%= link_to "取消标记", status_word_path(word), class: "badge badge-success", remote: true%>
             <% end -%>
           </span>
-          <button class="badge badge-primary" data-toggle="modal" data-target="#<%=word.id %>-modal">翻译</button>
+          <%= link_to "翻译", word_path(word), remote: true, class: "badge badge-primary"%>
         </td>
       </tr>
     <% end %>

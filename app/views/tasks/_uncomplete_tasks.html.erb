@@ -1,7 +1,7 @@
-<% @complete_tasks.each do |task| %>
+<% @incomplete_tasks.each do |task| %>
   <tr id="edit_task_<%= task.id%>">
     <td class="text-left text-secondary">
-      <del><%= task.name %></del>
+      <%= task.name %>
     </td>
     <td class="text-right text-secondary">
       <%= link_to "标记", task, method: :put, remote: true, class: "badge badge-primary"%>

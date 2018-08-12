@@ -6,6 +6,9 @@ class SessionsController < ApplicationController
     if auth = request.env["omniauth.auth"]
       user = User.find_by_omniauth(auth)
       log_in user
+      unless user.categories.find_by(name: "example")
+        user.categories.create(name: "example")
+      end
       flash[:success] = "GitHub登录成功"
       redirect_to root_path
     else

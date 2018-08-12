@@ -41,7 +41,7 @@
     <div class="card-body ">
       <div class="text-center">
         <% if @user.avatar.to_s.size == 0 %>
-          <img src="https://test.zhengjiajun.com/uploads/wechat/name/29/middle_avatar.png" width="100" height="100"/>
+          <img src="https://test.zhengjiajun.com/uploads/picture/attach/4/image-1534034224744.jpg" width="100" height="100"/>
         <% else %>
           <%= image_tag @user.avatar.large.url, size: "100x100" %>
         <% end %>

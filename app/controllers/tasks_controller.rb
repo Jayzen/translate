@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:update, :destroy]
+  before_action :set_task, only: [:update, :destroy, :delete]
   before_action :logged_in_user
-  #skip_before_action :verify_authenticity_token, only: [:update]
 
   def index
     @incomplete_tasks = current_user.tasks.where(complete: false).order("updated_at desc").page(params[:page])
@@ -13,29 +12,33 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = current_user.tasks.create(task_params)
+    @task = current_user.tasks.build(task_params)
   
-    respond_to do |f|
-      f.html { redirect_to tasks_url }
-      f.js
+    respond_to do |format|
+      @task.save
+      format.js
     end 
   end
 
   def update
     @task.toggle!(:complete)
   
-    respond_to do |f|
-      f.html { redirect_to tasks_url }
-      f.js
+    respond_to do |format|
+      format.js{ 
+        @incomplete_tasks = current_user.tasks.where(complete: false).order("updated_at desc").page(params[:page])
+        @complete_tasks = current_user.tasks.where(complete: true).order("updated_at desc").page(params[:page])
+      }
     end
+  end
+
+  def delete
   end
 
   def destroy
     @task.destroy
   
-    respond_to do |f|
-      f.html { redirect_to tasks_url }
-      f.js
+    respond_to do |format|
+      format.js
     end
   end
 

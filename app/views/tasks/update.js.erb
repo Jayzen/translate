@@ -1,5 +1,2 @@
-<% if @task.complete? %>
-  $('#complete_tasks').prepend($('#edit_task_<%= @task.id %>'))
-<% else %>
-  $('#incomplete_tasks').prepend($('#edit_task_<%= @task.id %>'))  
-<% end %>
+$('#complete_tasks').html('<%= j render(@complete_tasks)%>')
+$('#incomplete_tasks').html('<%= j render(@incomplete_tasks)%>')

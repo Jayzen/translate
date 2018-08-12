@@ -19,7 +19,9 @@ Rails.application.routes.draw do
     get 'set_weight', on: :member
     get 'delete', on: :member
   end
-  resources :tasks
+  resources :tasks do
+    get 'delete', on: :member
+  end
   resources :csvs, only: :index do
     post 'import', on: :collection
   end

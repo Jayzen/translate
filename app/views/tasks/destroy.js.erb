@@ -1,1 +1,6 @@
 $('#edit_task_<%= @task.id %>').remove();
+$('#confirm-modal').modal('hide');
+$('#confirm-modal').off('hidden.bs.modal');
+$('#confirm-modal').on('hidden.bs.modal', function (e) {
+    toastr['success']('单词计划删除成功!');
+});

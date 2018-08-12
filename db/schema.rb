@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_11_073656) do
+ActiveRecord::Schema.define(version: 2018_08_11_081736) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -19,15 +19,6 @@ ActiveRecord::Schema.define(version: 2018_08_11_073656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_categories_on_user_id"
-  end
-
-  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "weight"
-    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -61,19 +52,16 @@ ActiveRecord::Schema.define(version: 2018_08_11_073656) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "tag_id"
     t.boolean "status", default: false
     t.string "uk_voice"
     t.string "us_voice"
     t.integer "category_id"
     t.index ["category_id"], name: "index_words_on_category_id"
     t.index ["name"], name: "index_words_on_name"
-    t.index ["tag_id"], name: "index_words_on_tag_id"
     t.index ["user_id"], name: "index_words_on_user_id"
   end
 
   add_foreign_key "categories", "users"
-  add_foreign_key "tags", "users"
   add_foreign_key "tasks", "users"
   add_foreign_key "words", "users"
 end

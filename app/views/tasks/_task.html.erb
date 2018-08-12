@@ -1,9 +1,13 @@
 <tr id="edit_task_<%= task.id%>">
   <td class="text-left text-secondary">
-    1. &nbsp<%= task.name %>
+    <% if task.complete? %>
+      <del><%= task.name %></del>
+    <% else %>
+      <%= task.name %>
+    <% end %>
   </td>
   <td class="text-right text-secondary">
     <%= link_to "标记", task, method: :put, remote: true, class: "badge badge-primary"%>
-    <%= link_to "删除", task, method: :delete, data: {confirm: "Are you sure?"}, remote: true, class: "badge badge-danger" %>
+    <%= link_to "删除", delete_task_path(task), remote: true, class: "badge badge-danger" %>
   </td>
 </tr>
