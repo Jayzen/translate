@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       user = User.find_by(email: params[:session][:email].downcase)
-      if user.forbidden?
+      if user && user.forbidden?
         flash.now[:danger] = "用户已经被禁止"
         render 'new'
       elsif user && user.authenticate(params[:session][:password])

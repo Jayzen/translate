@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :find_category, only: [:edit, :update, :destroy, :delete, :set_weight]
 
   def index
-    @categories = current_user.categories 
+    @categories = current_user.categories.page(params[:page]).per(10) 
   end
 
   def new

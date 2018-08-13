@@ -2,7 +2,7 @@
 <div class="row">
   <%= render 'shared/word_bar' %>
   <div class="col-md-9">
-      <div class="card">
+      <div class="card mb-1">
         <div class="card-header text-center text-secondary">
           单词分类清单
         </div>
@@ -22,6 +22,7 @@
           </div>
         </div>
       </div>
+    <%= paginate @categories %>
   </div> 
 </div>
 <%= render 'shared/form_modal' %>
