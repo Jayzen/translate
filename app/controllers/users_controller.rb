@@ -1,7 +1,27 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:update, :edit, :avatar_new, :avatar_create, :avatar_update]
-  before_action :logged_in_user, only: [:edit, :update, :avatar_create, :avatar_update, :avatar_new]
-  before_action :correct_user, only: [:edit, :update, :avatar_create, :avatar_update, :avatar_new]
+  before_action :find_user,  only: [:edit, :update, :forbidden]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user
+  
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    
+    respond_to do |format|
+      if @user.save
+        @user.categories.create(name: "example")
+        format.js do
+          @users = User.all
+          render 'create', status: :created
+        end
+      else
+        format.js { render 'new', status: :unprocessable_entity }
+      end
+    end
+  end
 
   def edit
   end
@@ -12,6 +32,18 @@ class UsersController < ApplicationController
       redirect_to edit_user_path(@user)
     else
       render :edit
+    end
+  end
+
+  def index
+    @users = User.all
+  end
+
+  def forbidden
+    @user.toggle!(:forbidden)
+    
+    respond_to do |format|
+      format.js
     end
   end
 

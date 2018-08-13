@@ -1,0 +1,22 @@
+<tr id="user-<%= user.id %>">
+  <td class="text-left text-secondary">
+    <%= user.name %>
+    <% if current_user == user %>
+      <span class="badge badge-danger">当前用户</span>
+    <% end -%> 
+    <% if user.forbidden? %>
+      <span class="badge badge-danger">已禁止</span>
+    <% end -%>
+  </td>
+  <td class="text-right">
+    <% if !user.admin? %>
+      <% if !user.forbidden? %>
+        <%= link_to "禁止", forbidden_user_path(user), remote: true, class: "badge badge-primary" %>
+      <% else %>
+        <%= link_to "取消禁止", forbidden_user_path(user), remote: true, class: "badge badge-primary" %>
+      <% end -%>
+    <% else %>
+      <span class="badge badge-primary">管理员</span>
+    <% end -%>
+  </td>
+</tr>

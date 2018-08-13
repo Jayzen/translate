@@ -1,0 +1,38 @@
+<%= form_for(@user, html: { multipart: true }, remote: true, authenticity_token: true) do |f| %>
+  <div class="form-row">
+    <label class="col-sm-2 col-form-label text-secondary">名称:</label>
+    <div class="col-sm-8">
+      <%= f.text_field :name, class: "form-control #{'is-invalid' if has_error?(@user, :name)}" %>
+      <% if has_error?(@user, :name) %>
+        <div class="invalid-feedback d-block"><%= get_error(@user, :name) %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="col-sm-2 col-form-label text-secondary">邮箱:</label>
+    <div class="col-sm-8">
+      <%= f.text_field :email, class: "form-control #{'is-invalid' if has_error?(@user, :email)}" %>
+      <% if has_error?(@user, :email) %>
+        <div class="invalid-feedback d-block"><%= get_error(@user, :email) %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="col-sm-2 col-form-label text-secondary">密码:</label>
+    <div class="col-sm-8">
+      <%= f.password_field :password, class: "form-control #{'is-invalid' if has_error?(@user, :password)}" %>
+      <% if has_error?(@user, :password) %>
+        <div class="invalid-feedback d-block"><%= get_error(@user, :password) %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="col-sm-2 col-form-label text-secondary">密码确认:</label>
+    <div class="col-sm-8">
+      <%= f.password_field :password_confirmation, class: "form-control #{'is-invalid' if has_error?(@user, :password_confirmation)}" %>
+      <% if has_error?(@user, :password_confirmation) %>
+        <div class="invalid-feedback d-block"><%= get_error(@user, :password_confirmation) %></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

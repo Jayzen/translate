@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get "/auth/:provider/callback" => "sessions#create"
   delete '/logout',  to: 'sessions#destroy'
-  resources :users, :password_alters, :set_templates, :set_modules, only: [:edit, :update]
+  resources :password_alters, :set_templates, :set_modules, only: [:edit, :update]
+  resources :users do
+    get 'forbidden', on: :member
+  end
   resources :portraits, only: [:new, :create, :update] 
   resources :categories do
     get 'set_weight', on: :member

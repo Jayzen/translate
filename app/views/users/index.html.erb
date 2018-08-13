@@ -1,0 +1,29 @@
+<% provide(:title, "用户管理") %>
+<div class="row">
+  <%= render 'shared/basic_bar' %>
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-header text-secondary text-center">
+        用户管理
+      </div>
+      <div class="card-body">
+        <table class="table table-sm bg-white mb-1">
+          <tbody id="container_users">
+            <%= render @users %>
+          </tbody>
+        </table>
+        
+        <div class="d-flex flex-row justify-content-between">
+          <div>
+            <%= link_to new_user_path, class: "btn btn-sm btn-primary",remote: true do %>
+              新建用户
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/form_modal' %>
+<%= render 'shared/confirm_modal' %>
