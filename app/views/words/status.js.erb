@@ -1,7 +1,9 @@
 <% if @word.status == false %>
   $("#<%=@word.id%>-status").html("<%= escape_javascript(render('status')) %>");
   $("#<%=@word.id%>-status-explain").html("<%= escape_javascript(render('sets')) %>");
+  toastr['success']('标记成功!');
 <% else %>
   $("#<%=@word.id%>-status").html("<%= escape_javascript(render('status')) %>");
 $("#<%=@word.id%>-status-explain").html("<%= escape_javascript(render('sets')) %>");
+  toastr['success']('取消标记成功!');
 <% end -%>

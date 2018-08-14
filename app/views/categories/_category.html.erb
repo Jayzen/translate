@@ -1,9 +1,9 @@
 <tr id="category-<%= category.id %>">
   <td class="text-left text-secondary">
     <%= category.name %>
-    <% if current_user.categories.first == category %>
+    <% if @categories_all.first == category %>
       <span class="badge badge-danger">第一权重</span>
-    <%- end %>
+    <%- end %> 
   </td>
   <td class="text-right">
     <%= link_to "更新权重", set_weight_category_path(category), remote: true, class: "badge badge-primary" %>

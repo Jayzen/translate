@@ -27,22 +27,23 @@
 //= require spin
 //= require jquery.spin
 //= require ajax_period
-//= require toastr
 
 $(document).ready(function() {
   $('#form-modal-save-btn').click(function() {
     $('#form-modal-body').find('form').submit();
   });
 
-
   toastr.options = {
     "closeButton": false,
     "debug": false,
-    "positionClass": "toast-top-right",
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": false,
     "onclick": null,
-    "showDuration": "300",
+    "showDuration": "100",
     "hideDuration": "1000",
-    "timeOut": "2000",
+    "timeOut": "1000",
     "extendedTimeOut": "1000",
     "showEasing": "swing",
     "hideEasing": "linear",

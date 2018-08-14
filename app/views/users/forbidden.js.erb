@@ -1,1 +1,2 @@
 $("#user-<%=@user.id%>").replaceWith("<%= escape_javascript(render(@user)) %>");
+toastr['success']('用户权限设置成功!');

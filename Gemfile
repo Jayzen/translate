@@ -42,7 +42,6 @@ gem 'select_all-rails'
 gem 'csv'
 gem 'jquery-ui-rails'
 gem 'spinjs-rails'
-gem 'toastr-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

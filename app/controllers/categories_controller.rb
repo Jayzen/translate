@@ -4,6 +4,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = current_user.categories.page(params[:page]).per(10) 
+    @categories_all = current_user.categories
   end
 
   def new
@@ -15,7 +16,8 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.save
         format.js do
-          @categories = current_user.categories
+          @categories = current_user.categories.page(params[:page]).per(10)
+          @categories_all = current_user.categories
           render 'create', status: :created
         end
       else
@@ -30,7 +32,10 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.js { render 'update', status: :ok}
+        format.js do
+          @categories_all = current_user.categories
+          render 'update', status: :ok
+        end
       else
         format.js { render 'edit', status: :unprocessable_entity}
       end
@@ -40,7 +45,10 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.js { @categories = current_user.categories }
+      format.js do 
+        @categories = current_user.categories.page(params[:page]).per(10)
+        @categories_all = current_user.categories
+      end
     end
   end
 
@@ -50,7 +58,10 @@ class CategoriesController < ApplicationController
   def set_weight
     @category.update(weight: Time.now)
     respond_to do |format|
-      format.js { @categories = current_user.categories }
+      format.js do 
+        @categories = current_user.categories.page(params[:page]).per(10)
+        @categories_all = current_user.categories
+      end
     end
   end
 

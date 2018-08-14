@@ -33,7 +33,7 @@
     <div><%= link_to "新建单词", new_word_path, class: "btn btn-sm btn-primary" %></div>
   </div>
   <% end -%>
-  <div class="mt-1"><%= paginate @words %></div>
+  <div class="mt-1"><%= paginate @words, remote: true %></div>
 </div>
 
 <%= content_for :javascripts do %>

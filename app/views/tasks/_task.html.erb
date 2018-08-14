@@ -1,8 +1,10 @@
 <tr id="edit_task_<%= task.id%>">
   <td class="text-left text-secondary">
     <% if task.complete? %>
+      <small><%= task.updated_at.strftime("%Y年%m月%d日") %></small> | 
       <del><%= task.name %></del>
     <% else %>
+      <small><%= task.updated_at.strftime("%Y年%m月%d日") %></small> | 
       <%= task.name %>
     <% end %>
   </td>

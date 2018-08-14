@@ -22,7 +22,9 @@
           </div>
         </div>
       </div>
-    <%= paginate @categories %>
+      <div id="categories_pagination">
+        <%= paginate @categories %>
+      </div>
   </div> 
 </div>
 <%= render 'shared/form_modal' %>

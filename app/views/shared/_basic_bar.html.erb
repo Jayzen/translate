@@ -5,7 +5,7 @@
       </div>
       <div class="card-body d-flex flex-column row-hl">
         <a href="<%= edit_user_path(current_user) %>">
-          <button type="button" class="btn <%= ((controller_name == 'users') && (action_name == 'edit')) ? 'btn-primary' : 'btn-outline-secondary' %> btn-block">
+          <button type="button" class="btn <%= ((controller_name == 'users') && ((action_name == 'edit') || (action_name == 'update'))) ? 'btn-primary' : 'btn-outline-secondary' %> btn-block">
             <i class="fa fa-user fa-fw"></i> 基本信息
           </button>
         </a>

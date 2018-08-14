@@ -11,10 +11,13 @@ class PasswordAltersController < ApplicationController
       @user.errors.add(:old_password, "旧密码不正确")
       render 'edit'
     elsif @user.authenticate(params[:password_alter][:old_password]) && params[:password_alter][:old_password] == params[:password_alter][:password]
-      @user.errors.add(:password, "不能使用旧密码进行更新!")
+      @user.errors.add(:password, "不能使用旧密码进行更新")
       render 'edit'
     elsif params[:password_alter][:password].empty?
       @user.errors.add(:password, "新密码不能为空")
+      render 'edit'
+    elsif params[:password_alter][:password] != params[:password_alter][:password_confirmation]
+      @user.errors.add(:password_confirmation, "新密码和密码确认不一致")
       render 'edit'
     elsif @user.update_attributes(user_params)
       log_in @user
