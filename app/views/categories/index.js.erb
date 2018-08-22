@@ -1,0 +1,2 @@
+$('#container_categories').html('<%= escape_javascript render(@categories) %>');
+$('#categories_pagination').html('<%= escape_javascript paginate(@categories, remote: true) %>');

@@ -130,6 +130,6 @@ class WordsController < ApplicationController
     end
 
     def word_params
-      params.require(:word).permit(:name, :uk, :us, :chinese, :tag_id)
+      params.require(:word).permit(:name, :uk, :us, :chinese, :category_id)
     end
 end
